@@ -1,6 +1,6 @@
 # To build a java project with Maven
 
-name: Java CI with maven in Linux
+name: Java CI with maven on Linux
 
 on:
   push:
@@ -9,21 +9,23 @@ on:
 jobs:
   build:
 #    runs-on: ubuntu-latest
-    runs-on: ${{ matrix.os }}
+#    runs-on: ${{ matrix.os }}
+    runs-on: ubuntu-latest
     strategy:
       matrix:
         #test against several OSes:
-        os: [ubuntu-latest, macos-latest, windows-latest]
+        #os: [ubuntu-latest, macos-latest, windows-latest]
         #test against several java versions:
         java: [8, 11]
         # excludes JDK 11 on macOS and Windows
-        exclude:
-        - os: macos-latest
-          java: 11
-        - os: windows-latest
-          java: 11
+        #exclude:
+        #- os: macos-latest
+        #  java: 11
+        #- os: windows-latest
+        #  java: 11
 
-    name: Build with Java ${{ matrix.java }} on ${{ matrix.os }}
+#    name: Build with Java ${{ matrix.java }} on ${{ matrix.os }}
+    name: Build with Java ${{ matrix.java }} on Linux
     steps:
     - uses: actions/checkout@v2
     - name: Set up JDK ${{ matrix.java }}
