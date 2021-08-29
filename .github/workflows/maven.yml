@@ -15,7 +15,7 @@ jobs:
       matrix:
         include:
           - java: 8
-            additional-maven-args: "-P jacoco"
+            additional-maven-args: "-P jacoco -DrepoToken=$COVERALLS_REPO_TOKEN coveralls:report"
           - java: 11
         #test against several OSes:
         #os: [ubuntu-latest, macos-latest, windows-latest]
@@ -46,6 +46,8 @@ jobs:
       run: >
         mvn -f myproject/pom.xml 
         clean verify ${{ matrix.additional-maven-args }}
+      env: 
+        COVERALLS_REPO_TOKEN: ${{ secrets.COVERALLS_TOKEN }}
     - name: Generate JUnit Report
       run: >
         mvn -f myproject/pom.xml    
